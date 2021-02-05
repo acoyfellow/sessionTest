@@ -1,16 +1,14 @@
 <script context="module">
-  export async function load({ fetch }) {
-    console.log("index.svelte load() ->");
-    let url = `/hello.json`;
-    let result = await fetch(url);
-    const json = await result.json();
-    console.log("/hello.json response:", json);
-    return { props: json };
+  export async function load({ page, session, context, fetch }) {
+    console.log("index.svelte load() ->", { context });
+    return { props: { context } };
   }
 </script>
 
 <script>
-  export let hello;
+  export let context;
 </script>
 
-Hello {hello}
+Context should be populated here:
+
+<pre><code>{JSON.stringify(context, null, 2)}</code></pre>

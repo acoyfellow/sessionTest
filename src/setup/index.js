@@ -1,20 +1,18 @@
 export async function prepare(headers) {
-  console.log("setup/index.js prepare() called: -> ", { headers });
-  // note: if you depend on headers.cookie to validate sessions: 
-  // you'll be confused, like me!
   return {
     context: {
-      user: "userId123"
+      user: {
+        uid: 'userId123',
+        data: 'hello world',
+      },
+      headers
     }
   }
 };
-
 export function getSession(context) {
-  console.log('getSession', { context });
-  let {
-    user = null
-  } = context || {};
+  let { user = null, headers = {} } = context;
   return {
-    user
+    user,
+    headers
   }
 };
